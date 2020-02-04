@@ -13,9 +13,9 @@ import android.widget.SeekBar;
 
 public class PropertiesBSFragment extends BottomSheetDialogFragment implements SeekBar.OnSeekBarChangeListener {
 
-    public PropertiesBSFragment() {
-        // Required empty public constructor
-    }
+//    public PropertiesBSFragment() {
+//        // Required empty public constructor
+//    }
 
     private Properties mProperties;
 

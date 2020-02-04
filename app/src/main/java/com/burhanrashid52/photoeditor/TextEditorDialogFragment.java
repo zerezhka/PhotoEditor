@@ -29,16 +29,6 @@ public class TextEditorDialogFragment extends DialogFragment {
     public static final String TAG = TextEditorDialogFragment.class.getSimpleName();
     public static final String EXTRA_INPUT_TEXT = "extra_input_text";
     public static final String EXTRA_COLOR_CODE = "extra_color_code";
-    private EditText mAddTextEditText;
-    private TextView mAddTextDoneTextView;
-    private InputMethodManager mInputMethodManager;
-    private int mColorCode;
-    private TextEditor mTextEditor;
-
-    public interface TextEditor {
-        void onDone(String inputText, int colorCode);
-    }
-
 
     //Show dialog with provide text and text color
     public static TextEditorDialogFragment show(@NonNull AppCompatActivity appCompatActivity,
@@ -55,16 +45,21 @@ public class TextEditorDialogFragment extends DialogFragment {
 
     //Show dialog with default text input as empty and text color white
     public static TextEditorDialogFragment show(@NonNull AppCompatActivity appCompatActivity) {
-        return show(appCompatActivity,
-                "", ContextCompat.getColor(appCompatActivity, R.color.white));
+        return show(appCompatActivity, "", ContextCompat.getColor(appCompatActivity, R.color.white));
     }
+
+    private EditText mAddTextEditText;
+    private TextView mAddTextDoneTextView;
+    private InputMethodManager mInputMethodManager;
+    private int mColorCode;
+    private TextEditor mTextEditor;
 
     @Override
     public void onStart() {
         super.onStart();
         Dialog dialog = getDialog();
         //Make dialog full screen with transparent background
-        if (dialog != null) {
+        if (dialog != null && dialog.getWindow() != null) {
             int width = ViewGroup.LayoutParams.MATCH_PARENT;
             int height = ViewGroup.LayoutParams.MATCH_PARENT;
             dialog.getWindow().setLayout(width, height);
@@ -79,7 +74,7 @@ public class TextEditorDialogFragment extends DialogFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mAddTextEditText = view.findViewById(R.id.add_text_edit_text);
         mInputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -125,4 +120,9 @@ public class TextEditorDialogFragment extends DialogFragment {
     public void setOnTextEditorListener(TextEditor textEditor) {
         mTextEditor = textEditor;
     }
+
+    public interface TextEditor {
+        void onDone(String inputText, int colorCode);
+    }
+
 }

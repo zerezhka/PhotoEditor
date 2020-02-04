@@ -19,9 +19,9 @@ import ja.burhanrashid52.photoeditor.PhotoEditor;
 
 public class EmojiBSFragment extends BottomSheetDialogFragment {
 
-    public EmojiBSFragment() {
-        // Required empty public constructor
-    }
+//    public EmojiBSFragment() {
+//        // Required empty public constructor
+//    }
 
     private EmojiListener mEmojiListener;
 
@@ -46,14 +46,14 @@ public class EmojiBSFragment extends BottomSheetDialogFragment {
 
     @SuppressLint("RestrictedApi")
     @Override
-    public void setupDialog(Dialog dialog, int style) {
+    public void setupDialog(@NonNull Dialog dialog, int style) {
         super.setupDialog(dialog, style);
         View contentView = View.inflate(getContext(), R.layout.fragment_bottom_sticker_emoji_dialog, null);
         dialog.setContentView(contentView);
         CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) ((View) contentView.getParent()).getLayoutParams();
         CoordinatorLayout.Behavior behavior = params.getBehavior();
 
-        if (behavior != null && behavior instanceof BottomSheetBehavior) {
+        if (behavior instanceof BottomSheetBehavior) {
             ((BottomSheetBehavior) behavior).setBottomSheetCallback(mBottomSheetBehaviorCallback);
         }
         ((View) contentView.getParent()).setBackgroundColor(getResources().getColor(android.R.color.transparent));

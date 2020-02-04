@@ -19,9 +19,9 @@ import android.widget.ImageView;
 
 public class StickerBSFragment extends BottomSheetDialogFragment {
 
-    public StickerBSFragment() {
-        // Required empty public constructor
-    }
+//    public StickerBSFragment() {
+//        // Required empty public constructor
+//    }
 
     private StickerListener mStickerListener;
 
@@ -51,14 +51,14 @@ public class StickerBSFragment extends BottomSheetDialogFragment {
 
     @SuppressLint("RestrictedApi")
     @Override
-    public void setupDialog(Dialog dialog, int style) {
+    public void setupDialog(@NonNull Dialog dialog, int style) {
         super.setupDialog(dialog, style);
         View contentView = View.inflate(getContext(), R.layout.fragment_bottom_sticker_emoji_dialog, null);
         dialog.setContentView(contentView);
         CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) ((View) contentView.getParent()).getLayoutParams();
         CoordinatorLayout.Behavior behavior = params.getBehavior();
 
-        if (behavior != null && behavior instanceof BottomSheetBehavior) {
+        if (behavior instanceof BottomSheetBehavior) {
             ((BottomSheetBehavior) behavior).setBottomSheetCallback(mBottomSheetBehaviorCallback);
         }
         ((View) contentView.getParent()).setBackgroundColor(getResources().getColor(android.R.color.transparent));
@@ -81,7 +81,7 @@ public class StickerBSFragment extends BottomSheetDialogFragment {
         int[] stickerList = new int[]{R.drawable.aa, R.drawable.bb};
 
         @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_sticker, parent, false);
             return new ViewHolder(view);
         }
